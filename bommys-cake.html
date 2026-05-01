@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Bommy's Cake — Luxury Artisan Cakes</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --gold:#C9A84C;--gold-light:#E8CC7A;--gold-pale:#F5E6BE;
+  --dark:#0D0A07;--dark-2:#1A1410;--dark-3:#241E18;--dark-4:#2E2820;
+  --cream:#F9F3E8;--muted:#9A8A72;--red:#e74c3c;--green:#27ae60;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--cream);font-family:'Lato',sans-serif;font-weight:300;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.35;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--dark);}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:1.3rem 3rem;background:linear-gradient(to bottom,rgba(13,10,7,.96),transparent);transition:padding .4s,background .4s;}
+nav.scrolled{padding:.85rem 3rem;background:rgba(13,10,7,.97);border-bottom:1px solid rgba(201,168,76,.15);}
+.nav-logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;}
+.logo-svg{width:38px;height:38px;}
+.logo-text{font-family:'Cinzel',serif;font-size:.9rem;font-weight:600;letter-spacing:.15em;color:var(--gold);line-height:1.1;}
+.logo-text span{display:block;font-size:.52rem;letter-spacing:.3em;color:var(--muted);font-weight:400;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.18em;color:var(--muted);text-decoration:none;text-transform:uppercase;transition:color .3s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .3s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-links a:hover::after{transform:scaleX(1);}
+.nav-right{display:flex;align-items:center;gap:.8rem;}
+.cart-btn{position:relative;background:transparent;border:1px solid rgba(201,168,76,.38);color:var(--gold);padding:.5rem 1rem;cursor:pointer;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.14em;display:flex;align-items:center;gap:.5rem;transition:all .3s;}
+.cart-btn:hover{background:rgba(201,168,76,.1);}
+.cart-count{background:var(--gold);color:var(--dark);border-radius:50%;width:17px;height:17px;display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:700;font-family:'Lato',sans-serif;}
+.nav-cta{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.16em;color:var(--dark);background:var(--gold);padding:.6rem 1.3rem;text-decoration:none;text-transform:uppercase;transition:background .3s;}
+.nav-cta:hover{background:var(--gold-light);}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 70% 50%,rgba(201,168,76,.08),transparent 70%),radial-gradient(ellipse 40% 60% at 20% 80%,rgba(201,168,76,.05),transparent 60%),linear-gradient(160deg,#0D0A07 0%,#1A1410 50%,#0D0A07 100%);}
+.hero-orn{position:absolute;right:4%;top:50%;transform:translateY(-50%);width:42vw;max-width:580px;opacity:.1;animation:floatOrn 8s ease-in-out infinite;}
+@keyframes floatOrn{0%,100%{transform:translateY(-50%) rotate(0deg);}50%{transform:translateY(-52%) rotate(1deg);}}
+.hero-content{position:relative;z-index:2;padding:0 5rem;max-width:700px;animation:fadeUp 1.4s cubic-bezier(.16,1,.3,1) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(38px);}to{opacity:1;transform:none;}}
+.hero-tag{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:.9rem;animation:fadeUp 1.2s .2s cubic-bezier(.16,1,.3,1) both;}
+.hero-tag::before{content:'';width:38px;height:1px;background:var(--gold);}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6vw,5.8rem);font-weight:300;line-height:1;margin-bottom:1.3rem;animation:fadeUp 1.2s .35s cubic-bezier(.16,1,.3,1) both;}
+.hero-title em{font-style:italic;color:var(--gold);}
+.hero-sub{font-size:.92rem;line-height:1.85;color:var(--muted);max-width:440px;margin-bottom:2.5rem;animation:fadeUp 1.2s .5s cubic-bezier(.16,1,.3,1) both;}
+.hero-actions{display:flex;gap:1.3rem;align-items:center;flex-wrap:wrap;animation:fadeUp 1.2s .65s cubic-bezier(.16,1,.3,1) both;}
+.btn-gold{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dark);background:linear-gradient(135deg,var(--gold),var(--gold-light));padding:.95rem 2.4rem;text-decoration:none;transition:opacity .3s;border:none;cursor:pointer;display:inline-block;}
+.btn-gold:hover{opacity:.85;}
+.btn-outline{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(201,168,76,.4);padding-bottom:3px;transition:all .3s;}
+.btn-outline:hover{color:var(--gold-light);border-color:var(--gold-light);}
+.scroll-ind{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--muted);font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.3em;text-transform:uppercase;animation:fadeUp 1s 1.2s both;}
+.scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollP 2s ease-in-out infinite;}
+@keyframes scrollP{0%,100%{opacity:.4;}50%{opacity:1;}}
+
+/* DIVIDER */
+.divider{display:flex;align-items:center;justify-content:center;gap:1.3rem;padding:.7rem 0;opacity:.5;}
+.divider::before,.divider::after{content:'';flex:1;max-width:160px;height:1px;}
+.divider::before{background:linear-gradient(to right,transparent,var(--gold));}
+.divider::after{background:linear-gradient(to left,transparent,var(--gold));}
+
+/* SECTIONS */
+section{padding:5.5rem 5rem;}
+.sec-tag{font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-bottom:.7rem;}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3.2rem);font-weight:300;line-height:1.1;margin-bottom:1.3rem;}
+.sec-title em{font-style:italic;color:var(--gold);}
+.gold-bar{width:52px;height:1px;background:var(--gold);margin-bottom:1.6rem;}
+
+/* ABOUT */
+#about{background:var(--dark-2);display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.about-frame{width:100%;aspect-ratio:4/5;background:var(--dark-3);position:relative;display:flex;align-items:center;justify-content:center;}
+.about-frame-border{position:absolute;inset:1.1rem;border:1px solid rgba(201,168,76,.18);}
+.about-badge{position:absolute;bottom:-1.1rem;right:-1.1rem;width:115px;height:115px;background:var(--gold);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--dark);}
+.badge-num{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:600;line-height:1;}
+.badge-txt{font-family:'Cinzel',serif;font-size:.43rem;letter-spacing:.1em;text-align:center;line-height:1.5;}
+.about-text p{color:var(--muted);line-height:1.9;font-size:.88rem;margin-bottom:1rem;}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;margin-top:2.2rem;padding-top:2.2rem;border-top:1px solid rgba(201,168,76,.1);}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:2.1rem;font-weight:300;color:var(--gold);display:block;}
+.stat-l{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;}
+
+/* MENU */
+#menu{background:var(--dark);text-align:center;}
+.menu-head{margin-bottom:2.5rem;}
+.menu-head .gold-bar{margin:0 auto 1.6rem;}
+.filter-tabs{display:flex;justify-content:center;gap:.4rem;margin-bottom:2.2rem;flex-wrap:wrap;}
+.ftab{font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;padding:.45rem 1.1rem;border:1px solid rgba(201,168,76,.22);background:transparent;color:var(--muted);cursor:pointer;transition:all .3s;}
+.ftab.active,.ftab:hover{background:var(--gold);color:var(--dark);border-color:var(--gold);}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;}
+.menu-card{background:var(--dark-3);padding:2.2rem 1.6rem;position:relative;overflow:hidden;transition:background .4s;text-align:left;}
+.menu-card:hover{background:var(--dark-4);}
+.menu-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:transform .4s;}
+.menu-card:hover::after{transform:scaleX(1);}
+.mc-badge{position:absolute;top:.9rem;right:.9rem;font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:.1em;color:var(--dark);background:var(--gold);padding:.22rem .5rem;text-transform:uppercase;}
+.mc-emoji{font-size:2rem;margin-bottom:1rem;display:block;}
+.mc-name{font-family:'Cormorant Garamond',serif;font-size:1.32rem;margin-bottom:.45rem;color:var(--cream);}
+.mc-desc{font-size:.75rem;color:var(--muted);line-height:1.7;margin-bottom:1rem;}
+.mc-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.7rem;}
+.mc-price{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--gold);font-style:italic;}
+.mc-controls{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;}
+.mc-qty{display:flex;align-items:center;gap:.35rem;}
+.qty-btn{width:26px;height:26px;border:1px solid rgba(201,168,76,.32);background:transparent;color:var(--gold);cursor:pointer;font-size:.95rem;display:flex;align-items:center;justify-content:center;transition:all .3s;}
+.qty-btn:hover{background:var(--gold);color:var(--dark);}
+.qty-num{font-family:'Cinzel',serif;font-size:.7rem;color:var(--cream);min-width:18px;text-align:center;}
+.add-cart-btn{font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.13em;text-transform:uppercase;color:var(--dark);background:var(--gold);border:none;padding:.48rem .9rem;cursor:pointer;transition:all .3s;white-space:nowrap;}
+.add-cart-btn:hover{opacity:.82;}
+.add-cart-btn.added{background:var(--green);color:#fff;}
+
+/* CART SIDEBAR */
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:2000;opacity:0;pointer-events:none;transition:opacity .4s;}
+.cart-overlay.open{opacity:1;pointer-events:all;}
+.cart-sidebar{position:fixed;top:0;right:0;bottom:0;width:400px;max-width:95vw;background:var(--dark-2);z-index:2001;transform:translateX(100%);transition:transform .45s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;border-left:1px solid rgba(201,168,76,.14);}
+.cart-sidebar.open{transform:translateX(0);}
+.cart-header{padding:1.4rem 1.7rem;border-bottom:1px solid rgba(201,168,76,.1);display:flex;align-items:center;justify-content:space-between;}
+.cart-title{font-family:'Cinzel',serif;font-size:.82rem;letter-spacing:.2em;color:var(--gold);}
+.cart-close{background:transparent;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;transition:color .3s;line-height:1;}
+.cart-close:hover{color:var(--cream);}
+.cart-items{flex:1;overflow-y:auto;padding:1.1rem 1.7rem;}
+.cart-empty{text-align:center;padding:3rem 0;color:var(--muted);}
+.cart-empty-icon{font-size:3rem;margin-bottom:.8rem;opacity:.35;display:block;}
+.cart-item{display:flex;align-items:flex-start;gap:.9rem;padding:.9rem 0;border-bottom:1px solid rgba(201,168,76,.07);}
+.ci-emoji{font-size:1.7rem;flex-shrink:0;}
+.ci-info{flex:1;}
+.ci-name{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--cream);margin-bottom:.15rem;}
+.ci-price{font-size:.74rem;color:var(--gold);}
+.ci-controls{display:flex;align-items:center;gap:.35rem;margin-top:.45rem;}
+.ci-qty-btn{width:20px;height:20px;border:1px solid rgba(201,168,76,.28);background:transparent;color:var(--gold);cursor:pointer;font-size:.8rem;display:flex;align-items:center;justify-content:center;transition:all .3s;}
+.ci-qty-btn:hover{background:var(--gold);color:var(--dark);}
+.ci-qty{font-family:'Cinzel',serif;font-size:.64rem;color:var(--cream);min-width:14px;text-align:center;}
+.ci-remove{background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:.7rem;margin-left:.4rem;transition:color .3s;}
+.ci-remove:hover{color:var(--red);}
+.ci-total{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--gold);text-align:right;flex-shrink:0;}
+.cart-footer{padding:1.3rem 1.7rem;border-top:1px solid rgba(201,168,76,.12);}
+.cart-summary{margin-bottom:1.1rem;}
+.sum-row{display:flex;justify-content:space-between;font-size:.79rem;color:var(--muted);margin-bottom:.35rem;}
+.sum-row.total{font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--cream);margin-top:.7rem;padding-top:.7rem;border-top:1px solid rgba(201,168,76,.12);}
+.sum-row.total span:last-child{color:var(--gold);}
+.checkout-btn{width:100%;font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dark);background:linear-gradient(135deg,var(--gold),var(--gold-light));border:none;padding:1rem;cursor:pointer;transition:opacity .3s;}
+.checkout-btn:hover{opacity:.85;}
+
+/* CHECKOUT MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.86);z-index:3000;opacity:0;pointer-events:none;transition:opacity .4s;display:flex;align-items:center;justify-content:center;padding:1rem;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal-box{background:var(--dark-2);border:1px solid rgba(201,168,76,.18);width:100%;max-width:560px;max-height:90vh;overflow-y:auto;transform:translateY(28px);transition:transform .45s cubic-bezier(.16,1,.3,1);}
+.modal-overlay.open .modal-box{transform:none;}
+.modal-head{padding:1.3rem 1.9rem;border-bottom:1px solid rgba(201,168,76,.1);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--dark-2);z-index:1;}
+.modal-title{font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:.2em;color:var(--gold);}
+.modal-close{background:transparent;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;line-height:1;transition:color .3s;}
+.modal-close:hover{color:var(--cream);}
+.modal-body{padding:1.6rem 1.9rem;}
+.modal-section{margin-bottom:1.8rem;}
+.modal-sec-title{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-bottom:.9rem;padding-bottom:.45rem;border-bottom:1px solid rgba(201,168,76,.1);}
+.osi{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);padding:.28rem 0;}
+.osi-name{color:var(--cream);}
+.osi-price{color:var(--gold);}
+.grand-total{display:flex;justify-content:space-between;font-family:'Cormorant Garamond',serif;font-size:1.15rem;padding-top:.7rem;border-top:1px solid rgba(201,168,76,.12);margin-top:.4rem;}
+.grand-total span:last-child{color:var(--gold);}
+.form-group{margin-bottom:.9rem;}
+.form-group label{display:block;font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:.35rem;}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--dark-3);border:1px solid rgba(201,168,76,.18);color:var(--cream);padding:.75rem .9rem;font-family:'Lato',sans-serif;font-size:.83rem;outline:none;transition:border-color .3s;resize:none;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold);}
+.form-group textarea{min-height:75px;}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
+.form-group select option{background:var(--dark-3);}
+
+/* PAYMENT */
+.payment-options{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;}
+.pay-opt{border:1px solid rgba(201,168,76,.18);padding:.9rem .5rem;cursor:pointer;text-align:center;transition:all .3s;position:relative;}
+.pay-opt:hover{border-color:rgba(201,168,76,.45);}
+.pay-opt.selected{border-color:var(--gold);background:rgba(201,168,76,.06);}
+.pay-opt.selected::after{content:'✓';position:absolute;top:.35rem;right:.45rem;font-size:.65rem;color:var(--gold);}
+.pay-icon{font-size:1.7rem;display:block;margin-bottom:.35rem;}
+.pay-name{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.13em;text-transform:uppercase;color:var(--cream);}
+.pay-sub{font-size:.65rem;color:var(--muted);margin-top:.18rem;}
+.info-box{margin-top:.9rem;padding:.9rem 1.1rem;background:var(--dark-3);border:1px solid rgba(201,168,76,.12);display:none;}
+.info-box.show{display:block;}
+.upi-id{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--gold);text-align:center;letter-spacing:.04em;}
+.upi-hint{font-size:.7rem;color:var(--muted);text-align:center;margin-top:.35rem;}
+.upi-apps{display:flex;justify-content:center;gap:.7rem;margin-top:.55rem;flex-wrap:wrap;}
+.upi-app{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.08em;padding:.25rem .65rem;border:1px solid rgba(201,168,76,.22);color:var(--muted);}
+.modal-actions{display:flex;gap:.8rem;margin-top:1.3rem;}
+.place-btn{flex:1;font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dark);background:linear-gradient(135deg,var(--gold),var(--gold-light));border:none;padding:1rem;cursor:pointer;transition:opacity .3s;}
+.place-btn:hover{opacity:.85;}
+.cancel-btn{font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);background:transparent;border:1px solid rgba(201,168,76,.18);padding:1rem 1.3rem;cursor:pointer;transition:all .3s;}
+.cancel-btn:hover{border-color:var(--gold);color:var(--cream);}
+
+/* SUCCESS */
+.success-overlay{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:4000;opacity:0;pointer-events:none;transition:opacity .4s;display:flex;align-items:center;justify-content:center;padding:1rem;}
+.success-overlay.open{opacity:1;pointer-events:all;}
+.success-box{background:var(--dark-2);border:1px solid rgba(201,168,76,.28);width:100%;max-width:440px;padding:2.8rem 2.2rem;text-align:center;transform:scale(.9);transition:transform .45s cubic-bezier(.16,1,.3,1);}
+.success-overlay.open .success-box{transform:scale(1);}
+.success-icon{font-size:3.2rem;display:block;margin-bottom:1rem;}
+.success-title{font-family:'Cormorant Garamond',serif;font-size:1.9rem;color:var(--cream);margin-bottom:.7rem;}
+.success-title em{font-style:italic;color:var(--gold);}
+.success-msg{font-size:.82rem;color:var(--muted);line-height:1.7;margin-bottom:1.3rem;}
+.notify-box{background:var(--dark-3);border:1px solid rgba(201,168,76,.12);padding:.9rem 1.1rem;margin-bottom:1.3rem;text-align:left;}
+.sn-row{display:flex;align-items:flex-start;gap:.55rem;font-size:.76rem;color:var(--muted);margin-bottom:.38rem;}
+.sn-row:last-child{margin-bottom:0;}
+.sn-icon{color:var(--gold);flex-shrink:0;}
+.success-close-btn{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dark);background:var(--gold);border:none;padding:.85rem 2rem;cursor:pointer;transition:opacity .3s;}
+.success-close-btn:hover{opacity:.85;}
+
+/* PROCESS */
+#process{background:var(--dark-2);}
+.process-grid{display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;margin-top:3rem;}
+.process-steps{display:flex;flex-direction:column;}
+.step{display:flex;gap:1.6rem;padding:1.6rem 0;border-bottom:1px solid rgba(201,168,76,.07);transition:padding-left .3s;}
+.step:hover{padding-left:.38rem;}
+.step:last-child{border-bottom:none;}
+.step-n{font-family:'Cormorant Garamond',serif;font-size:2.6rem;color:rgba(201,168,76,.18);font-weight:300;line-height:1;min-width:52px;transition:color .3s;}
+.step:hover .step-n{color:var(--gold);}
+.step-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin-bottom:.35rem;}
+.step-desc{font-size:.76rem;color:var(--muted);line-height:1.7;}
+.promise-box{background:var(--dark-3);padding:2.3rem;border:1px solid rgba(201,168,76,.1);position:relative;}
+.promise-box::before{content:'"';position:absolute;top:-.7rem;left:2rem;font-family:'Cormorant Garamond',serif;font-size:4.5rem;color:var(--gold);opacity:.22;line-height:1;}
+.promise-q{font-family:'Cormorant Garamond',serif;font-size:1.28rem;font-style:italic;line-height:1.6;color:var(--cream);margin-bottom:1.3rem;}
+.promise-author{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;}
+.promise-feats{margin-top:1.8rem;display:flex;flex-direction:column;gap:.7rem;}
+.pf{display:flex;align-items:center;gap:.7rem;font-size:.78rem;color:var(--muted);}
+.pf::before{content:'';width:16px;height:1px;background:var(--gold);flex-shrink:0;}
+
+/* GALLERY */
+#gallery{background:var(--dark);text-align:center;}
+.gallery-head{margin-bottom:2.3rem;}
+.gallery-head .gold-bar{margin:0 auto 1.6rem;}
+.g-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:2.3rem;}
+.g-item{background:var(--dark-3);aspect-ratio:1;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;cursor:pointer;}
+.g-item:nth-child(1){grid-column:span 2;grid-row:span 2;aspect-ratio:auto;}
+.g-item:nth-child(5){grid-column:span 2;aspect-ratio:auto;min-height:165px;}
+.g-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.4rem;}
+.g-emoji{font-size:2.3rem;opacity:.26;}
+.g-item:nth-child(1) .g-emoji{font-size:3.8rem;}
+.g-label{font-family:'Cormorant Garamond',serif;font-size:.75rem;color:var(--muted);letter-spacing:.07em;}
+.g-overlay{position:absolute;inset:0;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.18);opacity:0;transition:opacity .4s;}
+.g-item:hover .g-overlay{opacity:1;}
+
+/* TESTIMONIALS */
+#testimonials{background:var(--dark-2);text-align:center;}
+.test-head .gold-bar{margin:0 auto 1.6rem;}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;margin-top:2.3rem;}
+.test-card{background:var(--dark-3);padding:2rem;border:1px solid rgba(201,168,76,.07);text-align:left;transition:border-color .4s;}
+.test-card:hover{border-color:rgba(201,168,76,.28);}
+.stars{color:var(--gold);font-size:.68rem;letter-spacing:.16em;margin-bottom:.9rem;}
+.test-q{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;line-height:1.7;color:var(--cream);margin-bottom:1.1rem;}
+.test-author{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;}
+.test-role{font-size:.7rem;color:var(--muted);margin-top:.2rem;}
+
+/* CONTACT */
+#contact{background:var(--dark);display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;}
+.contact-info p{color:var(--muted);line-height:1.9;margin-bottom:1.8rem;font-size:.86rem;}
+.c-details{display:flex;flex-direction:column;gap:1.2rem;}
+.c-item{display:flex;gap:.9rem;align-items:flex-start;}
+.c-icon{width:36px;height:36px;border:1px solid rgba(201,168,76,.25);display:flex;align-items:center;justify-content:center;font-size:.82rem;flex-shrink:0;}
+.c-label{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:.18rem;}
+.c-val{font-size:.8rem;color:var(--cream);}
+.contact-form-wrap{display:flex;flex-direction:column;gap:.9rem;}
+.send-btn{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dark);background:linear-gradient(135deg,var(--gold),var(--gold-light));border:none;padding:.95rem 2.2rem;cursor:pointer;transition:opacity .3s;align-self:flex-start;}
+.send-btn:hover{opacity:.85;}
+
+/* FOOTER */
+footer{background:var(--dark-2);padding:2.3rem 5rem;border-top:1px solid rgba(201,168,76,.09);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.1rem;}
+.footer-logo{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.15em;color:var(--gold);}
+.footer-copy{font-size:.7rem;color:var(--muted);}
+.footer-socials{display:flex;gap:.9rem;}
+.fsoc{width:32px;height:32px;border:1px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;font-size:.65rem;font-family:'Cinzel',serif;transition:all .3s;}
+.fsoc:hover{border-color:var(--gold);color:var(--gold);}
+
+/* TOAST */
+.toast{position:fixed;bottom:1.8rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--dark-3);border:1px solid rgba(201,168,76,.28);color:var(--cream);padding:.8rem 1.6rem;font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.14em;z-index:5000;transition:transform .4s cubic-bezier(.16,1,.3,1);white-space:nowrap;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:.95rem 1.4rem;}
+  nav.scrolled{padding:.75rem 1.4rem;}
+  .nav-links{display:none;}
+  section{padding:3.5rem 1.4rem;}
+  #about,#contact,#process .process-grid{grid-template-columns:1fr;gap:2.3rem;}
+  .process-grid{display:block;}
+  .process-grid>*:last-child{margin-top:2rem;}
+  .menu-grid,.test-grid{grid-template-columns:1fr;}
+  .g-grid{grid-template-columns:repeat(2,1fr);}
+  .g-item:nth-child(1),.g-item:nth-child(5){grid-column:span 1;aspect-ratio:1;min-height:auto;}
+  .hero-content{padding:0 1.4rem;}
+  footer{flex-direction:column;text-align:center;}
+  .payment-options{grid-template-columns:1fr 1fr;}
+  .modal-actions{flex-direction:column;}
+  .form-row-2{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <svg class="logo-svg" viewBox="0 0 60 60" fill="none">
+      <circle cx="30" cy="30" r="28" stroke="#C9A84C" stroke-width="1.2" opacity=".4"/>
+      <rect x="10" y="38" width="40" height="10" rx="1" fill="#C9A84C" opacity=".8"/>
+      <rect x="15" y="28" width="30" height="10" rx="1" fill="#C9A84C" opacity=".7"/>
+      <rect x="20" y="20" width="20" height="8" rx="1" fill="#C9A84C" opacity=".9"/>
+      <rect x="28" y="14" width="4" height="6" rx="1" fill="#C9A84C" opacity=".6"/>
+      <ellipse cx="30" cy="13" rx="2" ry="3" fill="#E8CC7A" opacity=".9"/>
+      <circle cx="18" cy="33" r="1.4" fill="#F5E6BE" opacity=".6"/>
+      <circle cx="30" cy="33" r="1.4" fill="#F5E6BE" opacity=".6"/>
+      <circle cx="42" cy="33" r="1.4" fill="#F5E6BE" opacity=".6"/>
+    </svg>
+    <div class="logo-text">Bommy's Cake<span>Artisan Patisserie</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="cart-btn" onclick="toggleCart()">🛒 Cart <span class="cart-count" id="cartCount">0</span></button>
+    <a href="#menu" class="nav-cta">Order Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-orn">
+    <svg viewBox="0 0 500 500" fill="none">
+      <circle cx="250" cy="250" r="240" stroke="#C9A84C" stroke-width="1"/>
+      <circle cx="250" cy="250" r="200" stroke="#C9A84C" stroke-width=".5"/>
+      <circle cx="250" cy="250" r="158" stroke="#C9A84C" stroke-width="1"/>
+      <line x1="10" y1="250" x2="490" y2="250" stroke="#C9A84C" stroke-width=".5"/>
+      <line x1="250" y1="10" x2="250" y2="490" stroke="#C9A84C" stroke-width=".5"/>
+      <line x1="80" y1="80" x2="420" y2="420" stroke="#C9A84C" stroke-width=".5"/>
+      <line x1="420" y1="80" x2="80" y2="420" stroke="#C9A84C" stroke-width=".5"/>
+      <rect x="175" y="175" width="150" height="150" stroke="#C9A84C" stroke-width=".5" transform="rotate(45 250 250)"/>
+      <rect x="210" y="290" width="80" height="28" rx="4" fill="#C9A84C" opacity=".3"/>
+      <rect x="220" y="265" width="60" height="25" rx="3" fill="#C9A84C" opacity=".4"/>
+      <rect x="230" y="244" width="40" height="21" rx="2" fill="#C9A84C" opacity=".5"/>
+      <rect x="246" y="228" width="8" height="16" rx="2" fill="#C9A84C" opacity=".4"/>
+      <ellipse cx="250" cy="225" rx="5" ry="7" fill="#E8CC7A" opacity=".6"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag">Artisan Luxury Cakes · Chennai</div>
+    <h1 class="hero-title">Where Every <em>Cake</em><br>Tells a Story</h1>
+    <p class="hero-sub">Handcrafted with the finest ingredients — each creation is a masterpiece of flavour, beauty and love, designed for your most precious moments.</p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn-gold">Order Now</a>
+      <a href="#contact" class="btn-outline">Custom Cakes</a>
+    </div>
+  </div>
+  <div class="scroll-ind"><div class="scroll-line"></div>Scroll</div>
+</section>
+
+<div class="divider"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.5 7H22l-6 4.5 2.5 7L12 16l-6.5 4.5L8 13 2 8.5h7.5L12 2z" fill="#C9A84C" opacity=".7"/></svg></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-visual reveal">
+    <div class="about-frame">
+      <div class="about-frame-border"></div>
+      <svg width="170" height="210" viewBox="0 0 170 210" fill="none" style="opacity:.17">
+        <rect x="12" y="158" width="146" height="44" rx="4" fill="#C9A84C"/>
+        <rect x="26" y="113" width="118" height="45" rx="3" fill="#C9A84C"/>
+        <rect x="44" y="76" width="82" height="37" rx="3" fill="#C9A84C"/>
+        <rect x="60" y="51" width="50" height="25" rx="2" fill="#C9A84C"/>
+        <rect x="78" y="34" width="7" height="17" rx="2" fill="#C9A84C"/>
+        <rect x="89" y="34" width="7" height="17" rx="2" fill="#C9A84C"/>
+        <ellipse cx="81" cy="32" rx="6" ry="7" fill="#E8CC7A"/>
+        <ellipse cx="93" cy="32" rx="6" ry="7" fill="#E8CC7A"/>
+        <circle cx="38" cy="136" r="5" fill="#F5E6BE" opacity=".7"/>
+        <circle cx="72" cy="136" r="5" fill="#F5E6BE" opacity=".7"/>
+        <circle cx="106" cy="136" r="5" fill="#F5E6BE" opacity=".7"/>
+        <circle cx="140" cy="136" r="5" fill="#F5E6BE" opacity=".7"/>
+      </svg>
+      <div class="about-badge">
+        <span class="badge-num">5+</span>
+        <span class="badge-txt">Years of<br>Excellence</span>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <p class="sec-tag">Our Story</p>
+    <h2 class="sec-title">Born from <em>Passion</em>,<br>Made with Love</h2>
+    <div class="gold-bar"></div>
+    <p>Bommy's Cake was born from a deep love for the art of baking and an unwavering belief that every celebration deserves something truly extraordinary.</p>
+    <p>Every cake we create is a labour of love — from selecting the finest ingredients to the meticulous handcrafting of each decorative element. We don't just bake cakes; we craft edible art.</p>
+    <p>Our founder Bommy brings years of culinary artistry to every creation, ensuring beauty, taste and craftsmanship come together in perfect harmony.</p>
+    <div class="about-stats">
+      <div><span class="stat-n">500+</span><span class="stat-l">Happy Clients</span></div>
+      <div><span class="stat-n">1K+</span><span class="stat-l">Cakes Created</span></div>
+      <div><span class="stat-n">100%</span><span class="stat-l">Handcrafted</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="8" y="8" width="8" height="8" stroke="#C9A84C" stroke-width="1" transform="rotate(45 12 12)"/></svg></div>
+
+<!-- MENU + ORDER -->
+<section id="menu">
+  <div class="menu-head reveal">
+    <p class="sec-tag">Order Online</p>
+    <h2 class="sec-title">Our <em>Signature</em> Collection</h2>
+    <div class="gold-bar"></div>
+    <p style="color:var(--muted);max-width:480px;margin:0 auto .4rem;font-size:.83rem;line-height:1.8;">Pick your cake, choose quantity, add to cart and checkout — we confirm via WhatsApp within 2 hours.</p>
+  </div>
+  <div class="filter-tabs reveal">
+    <button class="ftab active" onclick="filterMenu('all',this)">All Cakes</button>
+    <button class="ftab" onclick="filterMenu('wedding',this)">Wedding</button>
+    <button class="ftab" onclick="filterMenu('birthday',this)">Birthday</button>
+    <button class="ftab" onclick="filterMenu('custom',this)">Custom</button>
+    <button class="ftab" onclick="filterMenu('petit',this)">Petit</button>
+  </div>
+  <div class="menu-grid reveal" id="menuGrid"></div>
+</section>
+
+<div class="divider"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.5 7H22l-6 4.5 2.5 7L12 16l-6.5 4.5L8 13 2 8.5h7.5L12 2z" fill="#C9A84C" opacity=".7"/></svg></div>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="reveal">
+    <p class="sec-tag">How We Work</p>
+    <h2 class="sec-title">The <em>Craft</em> Behind<br>Every Cake</h2>
+    <div class="gold-bar"></div>
+  </div>
+  <div class="process-grid">
+    <div class="process-steps reveal">
+      <div class="step"><div class="step-n">01</div><div><div class="step-title">Consultation & Vision</div><div class="step-desc">We begin with a personal consultation to understand your celebration, aesthetic preferences and flavour desires.</div></div></div>
+      <div class="step"><div class="step-n">02</div><div><div class="step-title">Design & Proposal</div><div class="step-desc">Our artisan creates a custom design sketch tailored to your vision with a detailed quote and timeline.</div></div></div>
+      <div class="step"><div class="step-n">03</div><div><div class="step-title">Tasting Session</div><div class="step-desc">You're invited for a private tasting — sample signature flavours and choose your perfect combination.</div></div></div>
+      <div class="step"><div class="step-n">04</div><div><div class="step-title">Artisan Creation</div><div class="step-desc">Using the finest ingredients our team handcrafts your cake over multiple days with painstaking attention.</div></div></div>
+      <div class="step"><div class="step-n">05</div><div><div class="step-title">Delivery & Presentation</div><div class="step-desc">White-glove delivery and setup at your venue — your cake arrives in perfect, stunning condition.</div></div></div>
+    </div>
+    <div class="promise-box reveal">
+      <div class="promise-q">Every cake is a love letter — to you, to your guests, to the moment that will live forever in your memory.</div>
+      <div class="promise-author">— Bommy, Founder & Head Patissier</div>
+      <div class="promise-feats">
+        <div class="pf">Premium imported ingredients only</div>
+        <div class="pf">Fully allergen-aware & accommodating</div>
+        <div class="pf">Unlimited revisions on design</div>
+        <div class="pf">Freshly baked within 24 hrs of delivery</div>
+        <div class="pf">Temperature-controlled transportation</div>
+        <div class="pf">100% satisfaction guaranteed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" style="background:var(--dark);">
+  <div class="gallery-head reveal">
+    <p class="sec-tag">Portfolio</p>
+    <h2 class="sec-title">A Glimpse of Our <em>Artistry</em></h2>
+    <div class="gold-bar"></div>
+  </div>
+  <div class="g-grid reveal">
+    <div class="g-item"><div class="g-inner"><div class="g-emoji">🎂</div><div class="g-label">Wedding Masterpiece</div></div><div class="g-overlay"></div></div>
+    <div class="g-item"><div class="g-inner"><div class="g-emoji">🌸</div><div class="g-label">Floral Design</div></div><div class="g-overlay"></div></div>
+    <div class="g-item"><div class="g-inner"><div class="g-emoji">✨</div><div class="g-label">Gold Leaf Art</div></div><div class="g-overlay"></div></div>
+    <div class="g-item"><div class="g-inner"><div class="g-emoji">🍰</div><div class="g-label">Birthday Couture</div></div><div class="g-overlay"></div></div>
+    <div class="g-item"><div class="g-inner"><div class="g-emoji">🌹</div><div class="g-label">Rose Collection</div></div><div class="g-overlay"></div></div>
+    <div class="g-item"><div class="g-inner"><div class="g-emoji">🎁</div><div class="g-label">Petit Fours</div></div><div class="g-overlay"></div></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="test-head reveal">
+    <p class="sec-tag">Client Love</p>
+    <h2 class="sec-title">Words That <em>Warm</em> Our Heart</h2>
+    <div class="gold-bar"></div>
+  </div>
+  <div class="test-grid reveal">
+    <div class="test-card"><div class="stars">★★★★★</div><div class="test-q">"Our wedding cake was beyond anything we could have imagined. Every guest stopped to admire it before tasting — and the flavour was even more incredible than the beauty."</div><div class="test-author">Sarah & James M.</div><div class="test-role">Wedding Client</div></div>
+    <div class="test-card"><div class="stars">★★★★★</div><div class="test-q">"Bommy has an extraordinary gift. She understood my vision instantly and delivered something so perfect I cried when I saw it. This is not a cake — it's art."</div><div class="test-author">Priya K.</div><div class="test-role">Anniversary Celebration</div></div>
+    <div class="test-card"><div class="stars">★★★★★</div><div class="test-q">"We ordered the corporate collection for our company gala and received more compliments on the cakes than anything else at the event. Absolute five-star experience."</div><div class="test-author">David L.</div><div class="test-role">Corporate Event</div></div>
+  </div>
+</section>
+
+<div class="divider"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="8" y="8" width="8" height="8" stroke="#C9A84C" stroke-width="1" transform="rotate(45 12 12)"/></svg></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-info reveal">
+    <p class="sec-tag">Get in Touch</p>
+    <h2 class="sec-title">Start Your <em>Sweet</em><br>Journey</h2>
+    <div class="gold-bar"></div>
+    <p>Whether you have a specific vision or simply know you want something extraordinary, we'd love to hear from you.</p>
+    <div class="c-details">
+      <div class="c-item"><div class="c-icon">📞</div><div><div class="c-label">WhatsApp</div><div class="c-val">+91 96264 55233</div></div></div>
+      <div class="c-item"><div class="c-icon">✉️</div><div><div class="c-label">Email</div><div class="c-val">anto7tony7@gmail.com</div></div></div>
+      <div class="c-item"><div class="c-icon">📍</div><div><div class="c-label">Location</div><div class="c-val">Chennai, Tamil Nadu · By Appointment</div></div></div>
+      <div class="c-item"><div class="c-icon">🕐</div><div><div class="c-label">Response Time</div><div class="c-val">Within 24 hrs · Orders need 5+ days notice</div></div></div>
+    </div>
+  </div>
+  <div class="contact-form-wrap reveal">
+    <p class="sec-tag" style="margin-bottom:1rem;">Send an Enquiry</p>
+    <div class="form-row-2">
+      <div class="form-group"><label>First Name</label><input type="text" id="cFname" placeholder="First name"/></div>
+      <div class="form-group"><label>Last Name</label><input type="text" id="cLname" placeholder="Last name"/></div>
+    </div>
+    <div class="form-group"><label>Email</label><input type="email" id="cEmail" placeholder="your@email.com"/></div>
+    <div class="form-group"><label>Occasion</label>
+      <select id="cOcc"><option value="">Select occasion...</option><option>Wedding</option><option>Birthday</option><option>Anniversary</option><option>Corporate Event</option><option>Baby Shower</option><option>Other</option></select>
+    </div>
+    <div class="form-row-2">
+      <div class="form-group"><label>Event Date</label><input type="date" id="cDate"/></div>
+      <div class="form-group"><label>Budget Range</label>
+        <select id="cBudget"><option value="">Select range...</option><option>Below ₹1,500</option><option>₹1,500 – ₹3,000</option><option>₹3,000 – ₹6,000</option><option>₹6,000 – ₹12,000</option><option>₹12,000+</option></select>
+      </div>
+    </div>
+    <div class="form-group"><label>Your Vision</label><textarea id="cMsg" placeholder="Describe your dream cake — flavours, style, colours, size, any special requests..."></textarea></div>
+    <button class="send-btn" onclick="sendEnquiry()">Send via WhatsApp →</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Bommy's Cake</div>
+  <div class="footer-copy">© 2026 Bommy's Cake · Crafted with love in Chennai</div>
+  <div class="footer-socials">
+    <a href="https://wa.me/919626455233" target="_blank" class="fsoc">WA</a>
+    <a href="#" class="fsoc">IG</a>
+    <a href="#" class="fsoc">FB</a>
+  </div>
+</footer>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <div class="cart-title">🛒 Your Order</div>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty"><span class="cart-empty-icon">🎂</span><p style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--muted);">Your cart is empty</p><p style="font-size:.75rem;color:var(--muted);margin-top:.35rem;">Add some delicious cakes!</p></div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none;">
+    <div class="cart-summary">
+      <div class="sum-row"><span>Subtotal</span><span id="cartSubtotal">₹0</span></div>
+      <div class="sum-row"><span>Delivery</span><span style="color:var(--green);">Free</span></div>
+      <div class="sum-row total"><span>Total</span><span id="cartTotal">₹0</span></div>
+    </div>
+    <button class="checkout-btn" onclick="openCheckout()">Proceed to Checkout →</button>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-title">✨ Complete Your Order</div>
+      <button class="modal-close" onclick="closeCheckout()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <div class="modal-sec-title">Order Summary</div>
+        <div id="orderSummaryItems"></div>
+        <div class="grand-total"><span>Grand Total</span><span id="grandTotalDisplay">₹0</span></div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-sec-title">Your Details</div>
+        <div class="form-row-2">
+          <div class="form-group"><label>Full Name *</label><input type="text" id="oName" placeholder="Your full name"/></div>
+          <div class="form-group"><label>WhatsApp Number *</label><input type="tel" id="oPhone" placeholder="+91 XXXXX XXXXX"/></div>
+        </div>
+        <div class="form-group"><label>Email Address *</label><input type="email" id="oEmail" placeholder="your@email.com"/></div>
+        <div class="form-row-2">
+          <div class="form-group"><label>Delivery Date *</label><input type="date" id="oDate"/></div>
+          <div class="form-group"><label>Time Preference</label>
+            <select id="oTime"><option value="">Select time...</option><option>Morning (9am–12pm)</option><option>Afternoon (12pm–4pm)</option><option>Evening (4pm–8pm)</option></select>
+          </div>
+        </div>
+        <div class="form-group"><label>Delivery Address *</label><textarea id="oAddress" placeholder="Full delivery address in Chennai..."></textarea></div>
+        <div class="form-group"><label>Special Instructions</label><textarea id="oNotes" placeholder="Flavour preferences, message on cake, allergies, etc..."></textarea></div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-sec-title">Payment Method</div>
+        <div class="payment-options">
+          <div class="pay-opt" id="pay-gpay" onclick="selectPayment('gpay')">
+            <span class="pay-icon">📱</span>
+            <div class="pay-name">GPay / UPI</div>
+            <div class="pay-sub">Instant transfer</div>
+          </div>
+          <div class="pay-opt" id="pay-card" onclick="selectPayment('card')">
+            <span class="pay-icon">💳</span>
+            <div class="pay-name">Card</div>
+            <div class="pay-sub">Debit / Credit</div>
+          </div>
+          <div class="pay-opt" id="pay-cash" onclick="selectPayment('cash')">
+            <span class="pay-icon">💵</span>
+            <div class="pay-name">Cash</div>
+            <div class="pay-sub">Pay on delivery</div>
+          </div>
+        </div>
+        <div class="info-box" id="gpayBox">
+          <div class="upi-id">📲 9626455233@upi</div>
+          <div class="upi-hint">Scan & pay via any UPI app · Share screenshot on WhatsApp after ordering</div>
+          <div class="upi-apps">
+            <span class="upi-app">Google Pay</span>
+            <span class="upi-app">PhonePe</span>
+            <span class="upi-app">Paytm</span>
+            <span class="upi-app">BHIM</span>
+          </div>
+        </div>
+        <div class="info-box" id="cardBox">
+          <div style="font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:.15em;color:var(--gold);text-align:center;margin-bottom:.7rem;">CARD PAYMENT DETAILS</div>
+          <div class="form-group" style="margin-bottom:.7rem;"><label>Card Number</label><input type="text" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" oninput="this.value=this.value.replace(/\D/g,'').substring(0,16).replace(/(.{4})/g,'$1 ').trim()"/></div>
+          <div class="form-row-2">
+            <div class="form-group" style="margin-bottom:0;"><label>Expiry</label><input type="text" placeholder="MM / YY" maxlength="7"/></div>
+            <div class="form-group" style="margin-bottom:0;"><label>CVV</label><input type="text" placeholder="•••" maxlength="3"/></div>
+          </div>
+          <div class="upi-hint" style="margin-top:.7rem;">🔒 Secured · All major cards accepted</div>
+        </div>
+        <div class="info-box" id="cashBox">
+          <div class="upi-id" style="font-size:.95rem;">💵 Pay Cash at Delivery</div>
+          <div class="upi-hint">Exact change preferred · Our delivery person will collect at your door</div>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="place-btn" onclick="placeOrder()">🎂 Place Order</button>
+        <button class="cancel-btn" onclick="closeCheckout()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="success-overlay" id="successModal">
+  <div class="success-box">
+    <span class="success-icon">🎉</span>
+    <h2 class="success-title">Order <em>Confirmed!</em></h2>
+    <p class="success-msg">Thank you! Your order has been received. Bommy will reach out on WhatsApp within 2 hours to confirm all details.</p>
+    <div class="notify-box">
+      <div class="sn-row"><span class="sn-icon">📱</span><span>WhatsApp notification sent to <strong style="color:var(--cream);">Bommy (+91 96264 55233)</strong></span></div>
+      <div class="sn-row"><span class="sn-icon">✉️</span><span>Order details emailed to <strong style="color:var(--cream);">anto7tony7@gmail.com</strong></span></div>
+      <div class="sn-row"><span class="sn-icon">💬</span><span>You'll receive a WhatsApp confirmation within 2 hours</span></div>
+    </div>
+    <button class="success-close-btn" onclick="closeSuccess()">Back to Home</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── DATA ──
+const MENU_DATA = [
+  {id:1,name:"Bommy's Classic",emoji:"🎂",desc:"Iconic multi-tier masterpiece with vanilla chiffon, champagne buttercream & hand-painted gold leaf.",price:1500,badge:"Signature",cat:"wedding"},
+  {id:2,name:"Floral Fantasy",emoji:"🌹",desc:"Layers of rose water sponge adorned with hundreds of hand-piped sugar flowers in seasonal palettes.",price:800,badge:"Popular",cat:"wedding"},
+  {id:3,name:"Dark Decadence",emoji:"🍫",desc:"Rich Belgian dark chocolate with salted caramel ganache, mirror glaze finish & gold dust accents.",price:800,badge:"",cat:"birthday"},
+  {id:4,name:"Bespoke Couture",emoji:"✨",desc:"Fully tailored to your vision. Share your dream and we'll bring it to life — no limits on creativity.",price:800,badge:"Custom",cat:"custom"},
+  {id:5,name:"Wedding Royale",emoji:"💍",desc:"Elegant multi-tier wedding cakes crafted to be the centrepiece of your most magical day.",price:3000,badge:"Wedding",cat:"wedding"},
+  {id:6,name:"Celebration Petit",emoji:"🎁",desc:"Beautifully boxed individual cakes & cupcake collections — perfect for events and gatherings.",price:2000,badge:"",cat:"petit"},
+  {id:7,name:"Mango Delight",emoji:"🥭",desc:"Seasonal mango mousse layers with fresh cream, mirror glaze & edible gold — a tropical luxury.",price:800,badge:"Seasonal",cat:"birthday"},
+  {id:8,name:"Kids Fantasy",emoji:"🦄",desc:"Whimsical themed cakes for little ones — fondant characters, sprinkles and all the magic they deserve.",price:2500,badge:"",cat:"birthday"},
+  {id:9,name:"Corporate Elegance",emoji:"🏆",desc:"Premium branded cakes for corporate events, launches & milestone celebrations. Bulk pricing available.",price:5000,badge:"",cat:"custom"},
+];
+
+const OWNER_WA = "919626455233";
+const OWNER_EMAIL = "anto7tony7@gmail.com";
+
+let cart = {};
+let selectedPayment = "";
+
+// ── FORMAT ──
+const inr = n => "₹" + n.toLocaleString('en-IN');
+
+// ── MENU RENDER ──
+function renderMenu(filter="all") {
+  const grid = document.getElementById("menuGrid");
+  const items = filter==="all" ? MENU_DATA : MENU_DATA.filter(m=>m.cat===filter);
+  grid.innerHTML = items.map(item=>`
+    <div class="menu-card">
+      ${item.badge?`<div class="mc-badge">${item.badge}</div>`:""}
+      <span class="mc-emoji">${item.emoji}</span>
+      <div class="mc-name">${item.name}</div>
+      <div class="mc-desc">${item.desc}</div>
+      <div class="mc-bottom">
+        <div class="mc-price">${inr(item.price)}</div>
+        <div class="mc-controls">
+          <div class="mc-qty">
+            <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
+            <span class="qty-num" id="qty-${item.id}">${cart[item.id]?.qty||0}</span>
+            <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
+          </div>
+          <button class="add-cart-btn" id="acb-${item.id}" onclick="addToCart(${item.id})">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  `).join("");
+}
+
+function filterMenu(cat, btn) {
+  document.querySelectorAll(".ftab").forEach(t=>t.classList.remove("active"));
+  btn.classList.add("active");
+  renderMenu(cat);
+}
+
+// ── CART LOGIC ──
+function getItem(id){ return MENU_DATA.find(m=>m.id===id); }
+
+function changeQty(id, delta) {
+  const item = getItem(id); if(!item) return;
+  if(!cart[id]) cart[id]={...item,qty:0};
+  cart[id].qty = Math.max(0, cart[id].qty+delta);
+  if(cart[id].qty===0) delete cart[id];
+  const el = document.getElementById("qty-"+id);
+  if(el) el.textContent = cart[id]?.qty||0;
+  updateCartCount();
+}
+
+function addToCart(id) {
+  const item = getItem(id); if(!item) return;
+  if(!cart[id]) cart[id]={...item,qty:0};
+  cart[id].qty++;
+  const el = document.getElementById("qty-"+id);
+  if(el) el.textContent = cart[id].qty;
+  updateCartCount();
+  const btn = document.getElementById("acb-"+id);
+  if(btn){ btn.textContent="✓ Added"; btn.classList.add("added"); setTimeout(()=>{btn.textContent="Add to Cart";btn.classList.remove("added");},1500); }
+  showToast(`${item.emoji} ${item.name} added!`);
+}
+
+function updateCartCount() {
+  const total = Object.values(cart).reduce((s,i)=>s+i.qty,0);
+  document.getElementById("cartCount").textContent=total;
+}
+
+function getTotal(){ return Object.values(cart).reduce((s,i)=>s+(i.price*i.qty),0); }
+
+// ── CART SIDEBAR ──
+function toggleCart() {
+  const overlay=document.getElementById("cartOverlay");
+  const sidebar=document.getElementById("cartSidebar");
+  const open = sidebar.classList.contains("open");
+  if(!open) renderCartSidebar();
+  overlay.classList.toggle("open",!open);
+  sidebar.classList.toggle("open",!open);
+  document.body.style.overflow=open?"":"hidden";
+}
+
+function renderCartSidebar() {
+  const container=document.getElementById("cartItems");
+  const footer=document.getElementById("cartFooter");
+  const items=Object.values(cart);
+  if(!items.length){
+    container.innerHTML=`<div class="cart-empty"><span class="cart-empty-icon">🎂</span><p style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--muted);">Your cart is empty</p><p style="font-size:.75rem;color:var(--muted);margin-top:.35rem;">Add some delicious cakes!</p></div>`;
+    footer.style.display="none"; return;
+  }
+  container.innerHTML=items.map(i=>`
+    <div class="cart-item">
+      <div class="ci-emoji">${i.emoji}</div>
+      <div class="ci-info">
+        <div class="ci-name">${i.name}</div>
+        <div class="ci-price">${inr(i.price)} each</div>
+        <div class="ci-controls">
+          <button class="ci-qty-btn" onclick="sidebarQty(${i.id},-1)">−</button>
+          <span class="ci-qty" id="sq-${i.id}">${i.qty}</span>
+          <button class="ci-qty-btn" onclick="sidebarQty(${i.id},1)">+</button>
+          <button class="ci-remove" onclick="removeItem(${i.id})">✕ Remove</button>
+        </div>
+      </div>
+      <div class="ci-total" id="st-${i.id}">${inr(i.price*i.qty)}</div>
+    </div>
+  `).join("");
+  updateSidebarTotal();
+  footer.style.display="block";
+}
+
+function sidebarQty(id,delta){
+  changeQty(id,delta);
+  const el=document.getElementById("sq-"+id);
+  const tel=document.getElementById("st-"+id);
+  if(cart[id]){
+    if(el) el.textContent=cart[id].qty;
+    if(tel) tel.textContent=inr(cart[id].price*cart[id].qty);
+  } else {
+    renderCartSidebar();
+  }
+  updateSidebarTotal();
+}
+
+function removeItem(id){
+  delete cart[id];
+  updateCartCount();
+  renderCartSidebar();
+}
+
+function updateSidebarTotal(){
+  const t=getTotal();
+  const sub=document.getElementById("cartSubtotal");
+  const tot=document.getElementById("cartTotal");
+  if(sub) sub.textContent=inr(t);
+  if(tot) tot.textContent=inr(t);
+}
+
+// ── CHECKOUT ──
+function openCheckout(){
+  const items=Object.values(cart);
+  if(!items.length){ showToast("🎂 Add items to cart first!"); return; }
+  document.getElementById("orderSummaryItems").innerHTML=
+    items.map(i=>`<div class="osi"><span class="osi-name">${i.emoji} ${i.name} × ${i.qty}</span><span class="osi-price">${inr(i.price*i.qty)}</span></div>`).join("");
+  document.getElementById("grandTotalDisplay").textContent=inr(getTotal());
+  document.getElementById("checkoutModal").classList.add("open");
+  document.body.style.overflow="hidden";
+  document.getElementById("cartSidebar").classList.remove("open");
+  document.getElementById("cartOverlay").classList.remove("open");
+}
+
+function closeCheckout(){
+  document.getElementById("checkoutModal").classList.remove("open");
+  document.body.style.overflow="";
+}
+
+// ── PAYMENT SELECT ──
+function selectPayment(type){
+  selectedPayment=type;
+  document.querySelectorAll(".pay-opt").forEach(el=>el.classList.remove("selected"));
+  document.getElementById("pay-"+type).classList.add("selected");
+  document.getElementById("gpayBox").classList.toggle("show",type==="gpay");
+  document.getElementById("cardBox").style.display=type==="card"?"block":"none";
+  document.getElementById("cashBox").style.display=type==="cash"?"block":"none";
+}
+
+// ── PLACE ORDER ──
+function placeOrder(){
+  const name=document.getElementById("oName").value.trim();
+  const phone=document.getElementById("oPhone").value.trim();
+  const email=document.getElementById("oEmail").value.trim();
+  const date=document.getElementById("oDate").value;
+  const address=document.getElementById("oAddress").value.trim();
+  if(!name||!phone||!email||!date||!address){ showToast("⚠️ Please fill all required fields"); return; }
+  if(!selectedPayment){ showToast("⚠️ Please select a payment method"); return; }
+
+  const items=Object.values(cart);
+  const total=getTotal();
+  const time=document.getElementById("oTime").value||"Flexible";
+  const notes=document.getElementById("oNotes").value.trim();
+  const payLabel=selectedPayment==="gpay"?"GPay / UPI":selectedPayment==="card"?"Card (Debit/Credit)":"Cash on Delivery";
+  const itemLines=items.map(i=>`• ${i.emoji} ${i.name} × ${i.qty} = ${inr(i.price*i.qty)}`).join("\n");
+
+  // WhatsApp message
+  const waMsg=encodeURIComponent(
+`🎂 *NEW ORDER — Bommy's Cake* 🎂
+━━━━━━━━━━━━━━━━━━━━━
+👤 *Customer*
+Name: ${name}
+Phone: ${phone}
+Email: ${email}
+
+🛒 *Order Items*
+${itemLines}
+━━━━━━━━━━━━━━━━━━━━━
+💰 *Total: ${inr(total)}*
+💳 Payment: ${payLabel}
+━━━━━━━━━━━━━━━━━━━━━
+🚚 *Delivery*
+Date: ${date}
+Time: ${time}
+Address: ${address}
+${notes?`\n📝 Notes: ${notes}`:""}
+━━━━━━━━━━━━━━━━━━━━━
+_Ordered via Bommy's Cake website_`);
+
+  // Email content
+  const emailSub=encodeURIComponent(`🎂 New Order from ${name} — ${inr(total)}`);
+  const emailBody=encodeURIComponent(
+`NEW ORDER — Bommy's Cake
+================================
+Customer: ${name}
+Phone: ${phone}
+Email: ${email}
+
+ORDER ITEMS:
+${itemLines}
+
+TOTAL: ${inr(total)}
+Payment: ${payLabel}
+
+DELIVERY:
+Date: ${date} | Time: ${time}
+Address: ${address}
+${notes?`\nNotes: ${notes}`:""}`);
+
+  // Open WhatsApp
+  window.open(`https://wa.me/${OWNER_WA}?text=${waMsg}`,"_blank");
+  // Open email after short delay
+  setTimeout(()=>window.open(`mailto:${OWNER_EMAIL}?subject=${emailSub}&body=${emailBody}`,"_blank"),700);
+
+  // Reset cart & show success
+  closeCheckout();
+  cart={};
+  updateCartCount();
+  document.body.style.overflow="hidden";
+  document.getElementById("successModal").classList.add("open");
+}
+
+function closeSuccess(){
+  document.getElementById("successModal").classList.remove("open");
+  document.body.style.overflow="";
+  renderMenu();
+}
+
+// ── CONTACT ENQUIRY ──
+function sendEnquiry(){
+  const name=(document.getElementById("cFname").value+" "+document.getElementById("cLname").value).trim();
+  const email=document.getElementById("cEmail").value;
+  const occ=document.getElementById("cOcc").value||"Not specified";
+  const date=document.getElementById("cDate").value||"Not specified";
+  const budget=document.getElementById("cBudget").value||"Not specified";
+  const msg=document.getElementById("cMsg").value;
+  if(!name||!email){ showToast("⚠️ Please fill name and email"); return; }
+  const waMsg=encodeURIComponent(
+`🎂 *Enquiry — Bommy's Cake*
+Name: ${name}
+Email: ${email}
+Occasion: ${occ}
+Date: ${date}
+Budget: ${budget}
+Message: ${msg}`);
+  window.open(`https://wa.me/${OWNER_WA}?text=${waMsg}`,"_blank");
+  showToast("✅ Enquiry sent via WhatsApp!");
+}
+
+// ── TOAST ──
+function showToast(msg){
+  const t=document.getElementById("toast");
+  t.textContent=msg; t.classList.add("show");
+  clearTimeout(window._tt);
+  window._tt=setTimeout(()=>t.classList.remove("show"),2800);
+}
+
+// ── NAV SCROLL ──
+window.addEventListener("scroll",()=>{
+  document.getElementById("navbar").classList.toggle("scrolled",scrollY>55);
+});
+
+// ── REVEAL ──
+document.querySelectorAll(".reveal").forEach(el=>{
+  new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("visible"); });
+  },{threshold:.08}).observe(el);
+});
+
+// ── INIT ──
+renderMenu();
+</script>
+</body>
+</html>
