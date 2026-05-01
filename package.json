@@ -1,0 +1,12 @@
+{
+  "name": "bommy-cake",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Luxury cake shop website for Bommy's Cake",
+  "scripts": {
+    "start": "live-server --port=4173 --open=./index.html"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
